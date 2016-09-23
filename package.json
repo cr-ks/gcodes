@@ -2,9 +2,9 @@
   "name": "gcode",
   "version": "1.0.0",
   "description": "Gcode editor for PVFW",
-  "main": "g.js",
+  "main": "run.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "run": "node run.js"
   },
   "author": "",
   "license": "ISC"

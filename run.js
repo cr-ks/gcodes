@@ -1,22 +1,24 @@
 /* G-Code editor and for Niall @ Pioneer Valley Frameworks
 
 *******Set code Name********/
-var codeName = 'test.i';
+var codeName = '803.i';
 //Header imports and variables
 var fs = require('fs');
 
 var data;
 var index;
-var currentIndex = 88000;
+var currentIndex = 65535;
 var currentToReplace;
 var replaceWith;
 var currentIndex;
 
 //Read in Gcode file
 data = fs.readFileSync('codes/' + codeName, 'utf8');
+fs.rename('codes/' + codeName, 'codes/original-' + codeName);
 
-data = data.replace(/\n/g, " ");
+data = data.replace(/(?:\r\n|\r|\n)/g, " ");
 var arr = data.split(' ');
+
 
 //Loop over array and replace codes
 for (var i = 10; i >= 10; i = i + 5) {
@@ -33,10 +35,13 @@ for (var i = 10; i >= 10; i = i + 5) {
   }
 }
 
+
+
+
 //Revert data to string and write file
 data = arr.join(' ');
-var completedFile = data.replace('N', '\n');
-fs.writeFile('codes/new.i', completedFile, 'utf8', function (err) {
+var completedFile = data.replace(/ N/g, '\nN');
+fs.writeFile('codes/' + codeName, completedFile, 'utf8', function (err) {
   if (err) {
     console.log('File could not be saved!');
   } else {
